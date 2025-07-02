@@ -4,5 +4,6 @@
 void motor_init();
 void motor_set_speed(int left_pwm, int right_pwm);
 void motor_speed();
+void motor_stop();
 
 #endif
