@@ -6,6 +6,7 @@ typedef struct {
     float prev_error, integral;
 } PID;
 
-float pid_compute(PID *pid, float setpoint, float current);
+void pid_reset(PID *pid);
+float pid_compute(PID *pid, float setpoint, float measurement);
 
 #endif
