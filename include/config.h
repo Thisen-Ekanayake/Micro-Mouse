@@ -1,6 +1,9 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+#define ENCODER_LEFT_PIN    35
+#define ENCODER_RIGH_PIN    36
+
 #define LEFT_MOTOR_PWM      25
 #define RIGHT_MOTOR_PWM     26
 #define LEFT_MOTOR_DIR      27
