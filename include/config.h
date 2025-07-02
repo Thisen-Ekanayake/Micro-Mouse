@@ -13,6 +13,10 @@
 #define IR_SENSOR_FRONT     33
 #define IR_SENSOR_RIGHT     34
 
+#define IR_THRESHOLD_FRONT  400
+#define IR_THRESHOLD_LEFT   400
+#define IR_THRESHOLD_RIGHT  400
+
 #define MPU_SDA             21
 #define MPU_SCL             22
 
