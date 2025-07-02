@@ -38,21 +38,33 @@ void IRAM_ATTR right_encoder_isr() {
 
 void encoder_init() {
     pinMode(ENCODER_LEFT_PIN, INPUT_PULLUP);
-    pinMode(ENCODER_RIGH_PIN, INPUT_PULLUP);
+    pinMode(ENCODER_RIGHT_PIN, INPUT_PULLUP);
 
     attachInterrupt(digitalPinToInterrupt(ENCODER_LEFT_PIN), left_encoder_isr, RISING);
-    attachInterrupt(digitalPinToInterrupt(ENCODER_RIGH_PIN), right_encoder_isr, RISING);
+    attachInterrupt(digitalPinToInterrupt(ENCODER_RIGHT_PIN), right_encoder_isr, RISING);
 }
 
 void reset_ticks() {
+    noInterrupts();
     left_ticks = 0;
     right_ticks = 0;
+    interrupts();
 }
 
 int get_left_ticks() {
-    return left_ticks;
+    noInterrupts();
+    int ticks = left_ticks;
+    interrupts();
+    return ticks;
 }
 
 int get_right_ticks() {
-    return right_ticks;
+    noInterrupts();
+    int ticks = right_ticks;
+    interrupts();
+    return ticks;
+}
+
+int get_avg_ticks() {
+    return (get_left_ticks() + get_right_ticks()) / 2;
 }
