@@ -5,3 +5,8 @@
 .vscode/ipch
 
 *.pdf
+*.proto
+*.wbt
+*.wbproj
+*.py
+*.jpg
