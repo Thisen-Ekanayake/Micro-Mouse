@@ -36,4 +36,8 @@
 #define BATTERY_FULL_VOLTS  12.6
 #define BATTERY_LOW_VOLTS   10.5
 
+// ==== PID ====
+#define PID_INTEGRAL_MAX    500.0f
+#define PID_INTEGRAL_MIN   -500.0f
+
 #endif
