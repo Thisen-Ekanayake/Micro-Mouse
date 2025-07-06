@@ -140,3 +140,20 @@ void motor_set_speed(int left, int right) {
 void motor_stop() {
     motor_set_speed(0, 0);
 }
+
+// === smooth ramping ===
+void motor_set_speed_ramp(int left_target, int right_target, int ramp_step, int delay_ms) {
+    static int left_current = 0;
+    static int right_current = 0;
+
+    while (left_current != left_target || right_current != right_target) {
+        if (left_current < left_target) left_current += ramp_step;
+        else if (left_current > left_target) left_current -= ramp_step;
+
+        if (right_current < right_target) right_current += ramp_step;
+        else if (right_current > right_target) right_current -= ramp_step;
+
+        motor_set_speed(left_current, right_current);
+        delay(delay_ms);
+    }
+}
