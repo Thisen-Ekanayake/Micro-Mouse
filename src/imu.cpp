@@ -5,7 +5,7 @@
 
 MPU6050 mpu(Wire);
 
-// === optional angle normalization helper ===
+// === Optional angle normalization helper ===
 float normalize_angle(float angle) {
     while (angle >= 360.0f) angle -= 360.0f;
     while (angle < 0.0f) angle += 360.0f;
@@ -14,48 +14,42 @@ float normalize_angle(float angle) {
 
 void imu_init() {
     Wire.begin(MPU_SDA, MPU_SCL);   // I2C pins defined in config.h
-    
+
     byte status = mpu.begin();
     if (status != 0) {
-        Serial.print("MPU6050 init failed Code: ");
+        Serial.print("MPU6050 init failed! Code: ");
         Serial.println(status);
         while (1) {
             Serial.println("Halting due to IMU failure...");
             delay(1000);
-        }  // stop everything
+        }
     }
 
-    delay(1000);    // give time to stabilize
-
-    mpu.calcOffsets();  // calibrate on flat surface
+    delay(1000);            // Give time to stabilize
+    mpu.calcOffsets();      // Calibrate on flat surface
     Serial.println("IMU calibrated.");
 }
 
-float imu_get_heading() {
-    return normalize_angle(mpu.getAngleZ());  // z-axis = yaw/heading in degrees
+void imu_update() {
+    mpu.update();  // Must be called regularly to track angle correctly
 }
 
-void imu_update() {
-    mpu.update();   // must be called regularly to track angle correctly
+float imu_get_heading() {
+    return normalize_angle(mpu.getAngleZ());
 }
 
 float imu_get_raw_angle() {
-    return mpu.getAngleZ();   // use this if want to unnormalize values
+    return mpu.getAngleZ();  // Use this if you want unnormalized values
 }
-
 
 /*
-
-Test Code for Setup
+test code for main
 
 void loop() {
+    imu_update();  // Call this as often as possible (every ~5–10ms)
+    float heading = imu_get_heading();
     Serial.print("Heading: ");
-    Serial.println(get_heading());
-    delay(200);
+    Serial.println(heading);
+    delay(50);
 }
-
-Rotate the bot on the table slowly — it should show positive or negative degrees
-90° right turn ≈ +90°
-90° left turn ≈ -90° (or +270° depending on wraparound)
-
 */
