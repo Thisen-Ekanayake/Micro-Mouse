@@ -1,9 +1,9 @@
 #ifndef IMU_H
 #define IMU_H
 
-void imu_init();            // initialize and calibrate the imu
-void imu_update();          // call this regularly (every 5-10ms)
-float imu_get_heading();        // returns angle in degrees
-float imu_get_raw_angle();  // (optional) for direct use if normalization added
+void imu_init();             // Initialize and calibrate the IMU
+void imu_update();           // Call this regularly (e.g., every 5–10ms)
+float imu_get_heading();     // Get Z-axis angle (yaw in degrees)
+float imu_get_raw_angle();   // (Optional) for direct use if normalization added
 
 #endif
