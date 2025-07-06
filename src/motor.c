@@ -110,6 +110,13 @@ ledcWrite(1, clamp_pwm(abs(right)));
 ====================================================================================================================
 */
 
+// === clamp pwm to [0,255] ===
+int clamp_pwm(int val) {
+    if (val < 0) return 0;
+    if (val > 255) return 255;
+    return val;
+}
+
 void motor_init() {
     pinMode(LEFT_MOTOR_PWM, OUTPUT);
     pinMode(RIGHT_MOTOR_PWM, OUTPUT);
