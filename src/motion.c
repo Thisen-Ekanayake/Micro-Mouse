@@ -13,13 +13,13 @@ void move_forward_cm(float cm) {
     reset_ticks();
     pid_reset(&straight_pid);
 
-    while ((get_left_ticks() + get_right_ticks()) / 2 < target_ticks) {
+    while (get_avg_ticks() < target_ticks) {
         float error = get_left_ticks() - get_right_ticks();
         float correction = pid_compute(&straight_pid, 0, error);
 
         int base_speed = 150;
-        int left_pwm = base_speed - correction;
-        int right_pwm = base_speed + correction;
+        int left_pwm = constrain(base_speed - correction, 0, 255);
+        int right_pwm = constrain(base_speed + correction, 0, 255);
 
         motor_set_speed(left_pwm, right_pwm);
         delay(10);
