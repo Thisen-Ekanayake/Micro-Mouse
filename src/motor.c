@@ -125,11 +125,16 @@ void motor_init() {
 }
 
 void motor_set_speed(int left, int right) {
-    digitalWrite(LEFT_MOTOR_DIR, left >= 0 ? HIGH : LOW);
-    digitalWrite(RIGHT_MOTOR_DIR, right >= 0 ? HIGH : LOW);
 
-    analogWrite(LEFT_MOTOR_PWM, abs(left));
-    analogWrite(RIGHT_MOTOR_PWM, abs(right));
+    // determine direction
+    bool left_dir = (left >= 0);
+    bool right_dir = (right >= 0);
+
+    digitalWrite(LEFT_MOTOR_DIR, left_dir);
+    digitalWrite(RIGHT_MOTOR_DIR, right_dir);
+
+    analogWrite(LEFT_MOTOR_PWM, clamp_pwm(abs(left)));
+    analogWrite(RIGHT_MOTOR_PWM, clamp_pwm(abs(right)));
 }
 
 void motor_stop() {
