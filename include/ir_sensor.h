@@ -3,12 +3,12 @@
 
 void ir_sensor_init();
 
-int read_front_ir();
-int read_left_ir();
-int read_right_ir();
+int read_ir_front();
+int read_ir_left();
+int read_ir_right();
 
 bool is_wall_front();
-bool is_Wall_left();
+bool is_wall_left();
 bool is_wall_right();
 
 #endif
