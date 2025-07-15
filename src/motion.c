@@ -18,9 +18,10 @@ void move_forward_cm(float cm) {
         float correction = pid_compute(&straight_pid, 0, error);
 
         int base_speed = 150;
-        int left_pwm = constrain(base_speed - correction, 0, 255);
-        int right_pwm = constrain(base_speed + correction, 0, 255);
+        int left_pwm = base_speed - correction;
+        int right_pwm = base_speed + correction;
 
+        // allow negative values for reverse (not constrained to 0-255)
         motor_set_speed(left_pwm, right_pwm);
         delay(10);
     }
