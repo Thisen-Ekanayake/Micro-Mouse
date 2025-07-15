@@ -29,11 +29,15 @@ volatile int32_t left_ticks = 0;
 volatile int32_t right_ticks = 0;
 
 void IRAM_ATTR left_encoder_isr() {
-    left_ticks++;
+    bool a = digitalRead(ENCODER_LEFT_A);
+    bool b = digitalRead(ENCODER_LEFT_B);
+    left_ticks += (a == b) ? 1 : -1;
 }
 
 void IRAM_ATTR right_encoder_isr() {
-    right_ticks++;
+    bool a = digitalRead(ENCODER_RIGHT_A);
+    bool b = digitalRead(ENCODER_RIGHT_B);
+    right_ticks += (a == b) ? 1 : -1;
 }
 
 void encoder_init() {
