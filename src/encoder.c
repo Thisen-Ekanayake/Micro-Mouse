@@ -57,20 +57,20 @@ void reset_ticks() {
     interrupts();
 }
 
-int get_left_ticks() {
+int32_t get_left_ticks() {
     noInterrupts();
-    int ticks = left_ticks;
+    int32_t ticks = left_ticks;
     interrupts();
     return ticks;
 }
 
-int get_right_ticks() {
+int32_t get_right_ticks() {
     noInterrupts();
-    int ticks = right_ticks;
+    int32_t ticks = right_ticks;
     interrupts();
     return ticks;
 }
 
-int get_avg_ticks() {
+int32_t get_avg_ticks() {
     return (get_left_ticks() + get_right_ticks()) / 2;
 }
