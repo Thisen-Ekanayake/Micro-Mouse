@@ -13,7 +13,7 @@ void move_forward_cm(float cm) {
     reset_ticks();
     pid_reset(&straight_pid);
 
-    while (get_avg_ticks() < target_ticks) {
+    while (abs(get_avg_ticks()) < target_ticks) {
         float error = get_left_ticks() - get_right_ticks();
         float correction = pid_compute(&straight_pid, 0, error);
 
