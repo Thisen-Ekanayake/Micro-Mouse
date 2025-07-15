@@ -16,6 +16,12 @@
 #define RIGHT_MOTOR_IN1     21  // Bin1
 #define RIGHT_MOTOR_IN2     22  // Bin2
 
+// ==== PWM ====
+#define PWM_CHANNEL_LEFT    0
+#define PWM_CHANNEL_RIGHT   1
+#define PWM_FREQ            1000
+#define PWM_RESOLUTOIN      8
+
 
 // ==== IR Sensors ====
 #define IR_SENSOR_LEFT      32
