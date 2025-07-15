@@ -132,17 +132,26 @@ void motor_init() {
     ledcAttachPin(RIGHT_MOTOR_IN1, PWM_CHANNEL_RIGHT);
 }
 
+// sets signed speed: -255 (reverse) to +255 (forward)
 void motor_set_speed(int left, int right) {
 
-    // determine direction
-    bool left_dir = (left >= 0);
-    bool right_dir = (right >= 0);
+    // left motor
+    if (left >= 0) {
+        digitalWrite(LEFT_MOTOR_IN2, LOW);
+        ledcWrite(PWM_CHANNEL_LEFT, clamp_pwm(left));
+    } else {
+        digitalWrite(LEFT_MOTOR_IN2, HIGH);
+        ledcWrite(PWM_CHANNEL_LEFT, clamp_pwm(-left));
+    }
 
-    digitalWrite(LEFT_MOTOR_DIR, left_dir);
-    digitalWrite(RIGHT_MOTOR_DIR, right_dir);
-
-    analogWrite(LEFT_MOTOR_PWM, clamp_pwm(abs(left)));
-    analogWrite(RIGHT_MOTOR_PWM, clamp_pwm(abs(right)));
+    // right motor
+    if (right >= 0) {
+        digitalWrite(RIGHT_MOTOR_IN2, LOW);
+        ledcWrite(PWM_CHANNEL_RIGHT, clamp_pwm(right));
+    } else {
+        digitalWrite(RIGHT_MOTOR_IN2, HIGH);
+        ledcWrite(PWM_CHANNEL_RIGHT, clamp_pwm(-right));
+    }
 }
 
 void motor_stop() {
