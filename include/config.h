@@ -20,7 +20,7 @@
 #define PWM_CHANNEL_LEFT    0
 #define PWM_CHANNEL_RIGHT   1
 #define PWM_FREQ            1000
-#define PWM_RESOLUTOIN      8
+#define PWM_RESOLUTOIN      8   // 0 - 255
 
 
 // ==== IR Sensors ====
