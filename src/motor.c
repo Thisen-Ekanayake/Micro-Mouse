@@ -118,10 +118,11 @@ int clamp_pwm(int val) {
 }
 
 void motor_init() {
-    pinMode(LEFT_MOTOR_PWM, OUTPUT);
-    pinMode(RIGHT_MOTOR_PWM, OUTPUT);
-    pinMode(LEFT_MOTOR_DIR, OUTPUT);
-    pinMode(RIGHT_MOTOR_DIR, OUTPUT);
+    // setup motor control pins
+    pinMode(LEFT_MOTOR_IN1, OUTPUT);
+    pinMode(LEFT_MOTOR_IN2, OUTPUT);
+    pinMode(RIGHT_MOTOR_IN1, OUTPUT);
+    pinMode(RIGHT_MOTOR_IN2, OUTPUT);
 }
 
 void motor_set_speed(int left, int right) {
