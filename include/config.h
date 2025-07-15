@@ -9,8 +9,8 @@
 
 // ==== Motor Control Pins (DRV8833) ====
 // Left Motor (connected to Ain1 and Ain2)
-#define LEFT_MOTOR_IN1      18  // Ain1
-#define LEFT_MOTOR_IN2      19  // Ain2
+#define LEFT_MOTOR_IN1      19  // Ain1
+#define LEFT_MOTOR_IN2      18  // Ain2
 
 // Right Motor (connected to Bin1 and Bin2)
 #define RIGHT_MOTOR_IN1     21  // Bin1
