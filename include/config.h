@@ -2,14 +2,20 @@
 #define CONFIG_H
 
 // ==== Encoder Pins ====
-#define ENCODER_LEFT_PIN    35
-#define ENCODER_RIGHT_PIN   36
+#define ENCODER_LEFT_A      35
+#define ENCODER_LEFT_B      34
+#define ENCODER_RIGHT_A     32
+#define ENCODER_RIGHT_B     33
 
-// ==== Motor Pins ====
-#define LEFT_MOTOR_PWM      25
-#define RIGHT_MOTOR_PWM     26
-#define LEFT_MOTOR_DIR      27
-#define RIGHT_MOTOR_DIR     14
+// ==== Motor Control Pins (DRV8833) ====
+// Left Motor (connected to Ain1 and Ain2)
+#define LEFT_MOTOR_IN1      18  // Ain1
+#define LEFT_MOTOR_IN2      19  // Ain2
+
+// Right Motor (connected to Bin1 and Bin2)
+#define RIGHT_MOTOR_IN1     21  // Bin1
+#define RIGHT_MOTOR_IN2     22  // Bin2
+
 
 // ==== IR Sensors ====
 #define IR_SENSOR_LEFT      32
