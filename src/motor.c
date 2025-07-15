@@ -123,6 +123,13 @@ void motor_init() {
     pinMode(LEFT_MOTOR_IN2, OUTPUT);
     pinMode(RIGHT_MOTOR_IN1, OUTPUT);
     pinMode(RIGHT_MOTOR_IN2, OUTPUT);
+
+    // setup pwm on IN1 pins only (IN2 will be digital high/low)
+    ledcSetup(PWM_CHANNEL_LEFT, PWM_FREQ, PWM_RESOLUTOIN);
+    ledcAttachPin(LEFT_MOTOR_IN1, PWM_CHANNEL_LEFT);
+
+    ledcSetup(PWM_CHANNEL_RIGHT, PWM_FREQ, PWM_RESOLUTOIN);
+    ledcAttachPin(RIGHT_MOTOR_IN1, PWM_CHANNEL_RIGHT);
 }
 
 void motor_set_speed(int left, int right) {
