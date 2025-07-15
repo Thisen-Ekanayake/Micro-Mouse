@@ -155,7 +155,10 @@ void motor_set_speed(int left, int right) {
 }
 
 void motor_stop() {
-    motor_set_speed(0, 0);
+    ledcWrite(PWM_CHANNEL_LEFT, 0);
+    ledcWrite(PWM_CHANNEL_RIGHT, 0);
+    digitalWrite(LEFT_MOTOR_IN2, LOW);
+    digitalWrite(RIGHT_MOTOR_IN2, LOW);
 }
 
 // === smooth ramping ===
