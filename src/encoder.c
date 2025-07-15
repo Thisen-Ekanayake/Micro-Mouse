@@ -25,8 +25,8 @@ void loop() {
 */
 
 
-volatile int left_ticks = 0;
-volatile int right_ticks = 0;
+volatile int32_t left_ticks = 0;
+volatile int32_t right_ticks = 0;
 
 void IRAM_ATTR left_encoder_isr() {
     left_ticks++;
