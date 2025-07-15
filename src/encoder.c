@@ -46,8 +46,8 @@ void encoder_init() {
     pinMode(ENCODER_RIGHT_A, INPUT_PULLUP);
     pinMode(ENCODER_RIGHT_B, INPUT_PULLUP);
 
-    attachInterrupt(digitalPinToInterrupt(ENCODER_LEFT_PIN), left_encoder_isr, RISING);
-    attachInterrupt(digitalPinToInterrupt(ENCODER_RIGHT_PIN), right_encoder_isr, RISING);
+    attachInterrupt(digitalPinToInterrupt(ENCODER_LEFT_A), left_encoder_isr, CHANGE);
+    attachInterrupt(digitalPinToInterrupt(ENCODER_RIGHT_A), right_encoder_isr, CHANGE);
 }
 
 void reset_ticks() {
