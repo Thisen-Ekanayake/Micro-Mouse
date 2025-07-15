@@ -59,6 +59,7 @@ void loop() {
 
 
 
+/*
 // the setup function runs once when you press reset or power the board
 void setup() {
   // initialize digital pin 2 as an output.
@@ -71,4 +72,38 @@ void loop() {
   delay(500);                      // wait for a second
   digitalWrite(2, LOW);   // turn the LED off by making the voltage LOW
   delay(500);                      // wait for a second
+}
+*/
+
+void setup() {
+  Serial.begin(115200);
+  Serial.println("=== Motor Test Start ===");
+
+  motor_init();
+  delay(1000);
+}
+
+void loop() {
+  Serial.println("Moving Forward...");
+  motor_set_speed(150, 150);
+  delay(1000);
+
+  Serial.println("Moving Backward...");
+  motor_set_speed(-150, -150);
+  delay(1000);
+
+  Serial.println("Turning Left...");
+  motor_set_speed(-150, 150);
+  delay(1000);
+
+  Serial.println("Turning Right...");
+  motor_set_speed(150, -150);
+  delay(1000);
+
+  Serial.println("Stopping...");
+  motor_stop();
+  delay(2000);
+
+  // loop forever for now
+  while(true);
 }
