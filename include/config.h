@@ -13,8 +13,8 @@
 #define LEFT_MOTOR_IN2      18  // Ain2
 
 // Right Motor (connected to Bin1 and Bin2)
-#define RIGHT_MOTOR_IN1     21  // Bin1
-#define RIGHT_MOTOR_IN2     22  // Bin2
+#define RIGHT_MOTOR_IN1     26  // Bin1 26
+#define RIGHT_MOTOR_IN2     27  // Bin2 27
 
 // ==== PWM ====
 #define PWM_CHANNEL_LEFT    0
