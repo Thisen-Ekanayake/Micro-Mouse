@@ -156,7 +156,7 @@ void loop() {
   Serial.printf("BAT: %.2fV, %.2fmA\n", v1, i1 * 1000);
   Serial.println(charging ? "Charging" : "Disconnected");
 
-  uint8_t d1, d2, d3;
+  uint16_t d1, d2, d3;
   String left, right, front;
   readToF(d1, d2, d3, left, right, front);
 

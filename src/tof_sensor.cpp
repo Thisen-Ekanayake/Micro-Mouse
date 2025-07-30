@@ -17,7 +17,7 @@ void initToFSensor() {
   sensor1.startContinuous(); sensor2.startContinuous(); sensor3.startContinuous();
 }
 
-void readToF(uint8_t &d1, uint8_t &d2, uint8_t &d3, String &l, String &r, String &f) {
+void readToF(uint16_t &d1, uint16_t &d2, uint16_t &d3, String &l, String &r, String &f) {
   d1 = sensor1.readRangeContinuousMillimeters();
   d2 = sensor2.readRangeContinuousMillimeters();
   d3 = sensor3.readRangeContinuousMillimeters();
