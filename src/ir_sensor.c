@@ -23,7 +23,7 @@ int read_ir_right() {
 }
 
 bool is_wall_front() {
-    return read_front_ir() > IR_THRESHOLD_FRONT;
+    return read_ir_front() > IR_THRESHOLD_FRONT;
 }
 
 bool is_wall_left() {
