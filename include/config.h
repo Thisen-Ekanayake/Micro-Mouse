@@ -71,4 +71,10 @@
 #define SDA_PIN             21
 #define SCL_PIN             22
 
+
+// ==== ToF XSHUT Pins ====
+#define XSHUT1              25
+#define XSHUT2              2
+#define XSHUT3              4
+
 #endif
