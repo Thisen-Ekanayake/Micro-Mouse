@@ -172,13 +172,13 @@ void loop() {
   Serial.println("Stopped.");
 
   // Get ticks and calculate distance
-  int left = get_left_ticks();
-  int right = get_right_ticks();
+  int left_tick = get_left_ticks();
+  int right_tick = get_right_ticks();
   int avg = get_avg_ticks();
   float distance_mm = ticks_to_distance_mm(avg);
 
-  Serial.print("Left Ticks: "); Serial.println(left);
-  Serial.print("Right Ticks: "); Serial.println(right);
+  Serial.print("Left Ticks: "); Serial.println(left_tick);
+  Serial.print("Right Ticks: "); Serial.println(right_tick);
   Serial.print("Average Ticks: "); Serial.println(avg);
   Serial.print("Distance Traveled (mm): "); Serial.println(distance_mm);
 
