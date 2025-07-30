@@ -18,19 +18,19 @@ void updateDisplay(float v0, float i0, float v1, float i1, const String& l, cons
     display.setTextSize(1);
 
     display.print(F("OUT V: ")); display.print(v0, 2);
-  display.print(F("  I: ")); display.print(i0 * 1000, 0); display.println(F("mA"));
+    display.print(F("  I: ")); display.print(i0 * 1000, 0); display.println(F("mA"));
 
-  display.print(F("BAT V: ")); display.print(v1, 2);
-  display.print(F(" I: ")); display.print(i1 * 1000, 0); display.println(F("mA"));
+    display.print(F("BAT V: ")); display.print(v1, 2);
+    display.print(F(" I: ")); display.print(i1 * 1000, 0); display.println(F("mA"));
 
-  display.setCursor(0, 24);
-  display.print("Left : "); display.println(l);
-  display.print("Right: "); display.println(r);
-  display.print("Front: "); display.println(f);
+    display.setCursor(0, 24);
+    display.print("Left : "); display.println(l);
+    display.print("Right: "); display.println(r);
+    display.print("Front: "); display.println(f);
 
-  display.setCursor(0, 56);
-  display.setTextSize(1);
-  display.println(charging ? F("Charging") : F("Charger Disconnected"));
+    display.setCursor(0, 56);
+    display.setTextSize(1);
+    display.println(charging ? F("Charging") : F("Charger Disconnected"));
 
-  display.display();
+    display.display();
 }
