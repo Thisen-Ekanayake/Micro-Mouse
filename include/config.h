@@ -66,4 +66,9 @@
 #define OLED_RESET          -1
 #define SCREEN_ADDRESS      0x3C
 
+
+// ==== I2C pins for ESP32 ====
+#define SDA_PIN             21
+#define SCL_PIN             22
+
 #endif
