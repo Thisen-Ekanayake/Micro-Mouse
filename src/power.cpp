@@ -15,6 +15,6 @@ float getShuntVoltage(uint8_t channel) {
     return ina3221.getShuntVoltage(channel);
 }
 
-float getCurren(uint8_t channel) {
+float getCurrent(uint8_t channel) {
     return ina3221.getCurrentAmps(channel);
 }
