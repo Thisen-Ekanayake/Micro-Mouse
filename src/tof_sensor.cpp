@@ -4,7 +4,7 @@
 
 VL53L0X sensor1, sensor2, sensor3;
 
-void initToFSensors() {
+void initToFSensor() {
   pinMode(XSHUT1, OUTPUT); pinMode(XSHUT2, OUTPUT); pinMode(XSHUT3, OUTPUT);
   digitalWrite(XSHUT1, LOW); digitalWrite(XSHUT2, LOW); digitalWrite(XSHUT3, LOW);
   delay(10);
