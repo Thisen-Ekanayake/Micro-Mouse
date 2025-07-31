@@ -115,7 +115,7 @@ void loop() {
   // while(true);
 }*/
 
-
+/*
 // === Constants ===
 const float WHEEL_DIAMETER_MM = 43.0;
 const int TICKS_PER_REVOLUTION = 1440;
@@ -208,4 +208,53 @@ void loop() {
     isMoving = !isMoving;
     movementTimer = now;
   }
+}
+*/
+/*
+void setup() {
+  Serial.begin(115200);
+  delay(1000); // give serial time to connect
+  Serial.println("Starting IMU Test...");
+
+  imu_init();
+}
+
+void loop() {
+  imu_update();
+
+  float heading = imu_get_heading();
+  Serial.print("Heading: ");
+  Serial.println(heading);
+
+  delay(50);
+}
+*/
+
+unsigned long last_update = 0;
+float previous_heading = 0;
+const float alpha = 0.95;  // Low-pass filter coefficient
+
+void setup() {
+    Serial.begin(115200);
+    imu_init();  // Initialize and calibrate MPU6050
+    delay(1000); // Give time for everything to stabilize
+    Serial.println("IMU test started...");
+}
+
+void loop() {
+    if (millis() - last_update >= 5) {
+        imu_update();
+
+        float raw = imu_get_heading();
+        float filtered = alpha * previous_heading + (1 - alpha) * raw;
+        previous_heading = filtered;
+
+        // Print raw and filtered values for comparison
+        Serial.print("Raw: ");
+        Serial.print(raw);
+        Serial.print("  |  Filtered: ");
+        Serial.println(filtered);
+
+        last_update = millis();
+    }
 }
