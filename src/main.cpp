@@ -232,7 +232,7 @@ void loop() {
 
 unsigned long last_update = 0;
 float previous_heading = 0;
-const float alpha = 0.95;  // Low-pass filter coefficient
+const float alpha = 0.98;  // Low-pass filter coefficient
 
 void setup() {
     Serial.begin(115200);
