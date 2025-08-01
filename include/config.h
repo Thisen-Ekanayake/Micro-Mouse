@@ -4,8 +4,8 @@
 // ==== Encoder Pins ====
 #define ENCODER_LEFT_A      35
 #define ENCODER_LEFT_B      34
-#define ENCODER_RIGHT_A     32
-#define ENCODER_RIGHT_B     33
+#define ENCODER_RIGHT_A     33
+#define ENCODER_RIGHT_B     32
 
 
 // ==== Motor Control Pins (DRV8833) ====
