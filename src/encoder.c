@@ -46,10 +46,18 @@ void encoder_init() {
     pinMode(ENCODER_RIGHT_A, INPUT_PULLUP);
     pinMode(ENCODER_RIGHT_B, INPUT_PULLUP);
 
+    /*
+    Interrupt Flooding:
+    when attaching interrupts to both A and B channels of each encoder this happens thats why one encoder worked properly but the other didnt
+    This doubles the ISR load, possibly overwhelming the CPU or causing missed interrupts (especially on noisy channels or poor pins).
+
+    solution: use only one channel per encoder and this reduce the pressure but cutting down interrupts 50%
+    */
+   
     attachInterrupt(digitalPinToInterrupt(ENCODER_LEFT_A), left_encoder_isr, CHANGE);
-    attachInterrupt(digitalPinToInterrupt(ENCODER_LEFT_B), left_encoder_isr, CHANGE);
+    //attachInterrupt(digitalPinToInterrupt(ENCODER_LEFT_B), left_encoder_isr, CHANGE);
     attachInterrupt(digitalPinToInterrupt(ENCODER_RIGHT_A), right_encoder_isr, CHANGE);
-    attachInterrupt(digitalPinToInterrupt(ENCODER_RIGHT_B), right_encoder_isr, CHANGE);
+    //attachInterrupt(digitalPinToInterrupt(ENCODER_RIGHT_B), right_encoder_isr, CHANGE);
 }
 
 void reset_ticks() {
