@@ -115,13 +115,13 @@ void loop() {
   // while(true);
 }*/
 
-/*
+
 // === Constants ===
 const float WHEEL_DIAMETER_MM = 43.0;
 const int TICKS_PER_REVOLUTION = 1440;
 const unsigned long tofInterval = 100; // ms
 const unsigned long motionInterval = 3000; // 3 sec
-float correction_factor = 640.0 / 371.0;
+//float correction_factor = 640.0 / 371.0;
 
 // === Timekeeping ===
 unsigned long lastToFRead = 0;
@@ -133,7 +133,7 @@ bool isMoving = false;
 // === Conversion ===
 float ticks_to_distance_mm(int ticks) {
   float wheel_circumference = PI * WHEEL_DIAMETER_MM;
-  return (wheel_circumference * ticks) / TICKS_PER_REVOLUTION * correction_factor;
+  return (wheel_circumference * ticks) / TICKS_PER_REVOLUTION; //* correction_factor;
 }
 
 void setup() {
@@ -209,7 +209,7 @@ void loop() {
     movementTimer = now;
   }
 }
-*/
+
 /*
 void setup() {
   Serial.begin(115200);
@@ -229,7 +229,7 @@ void loop() {
   delay(50);
 }
 */
-
+/*
 unsigned long last_update = 0;
 float previous_heading = 0;
 const float alpha = 0.98;  // Low-pass filter coefficient
@@ -258,3 +258,4 @@ void loop() {
         last_update = millis();
     }
 }
+*/
