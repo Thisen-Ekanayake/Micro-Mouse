@@ -29,6 +29,26 @@ void move_forward_cm(float cm) {
     motor_stop();
 }
 
+void move_backward_cm(float cm) {
+    int target_ticks = cm * TICKS_PER_CM;
+    reset_ticks();
+    pid_reset(&straight_pid);
+
+    while (abs(get_avg_ticks()) < target_ticks) {
+        float error = get_left_ticks() - get_right_ticks();
+        float correction = pid_compute(&straight_pid, 0, error);
+
+        int base_speed = -150; // negative for reverse
+        int left_pwm = base_speed - correction;
+        int right_pwm = base_speed + correction;
+
+        motor_set_speed(left_pwm, right_pwm);
+        delay(10);
+    }
+
+    motor_stop();
+}
+
 // placeholder versions - implement this later
 
 void rotate_90_left() {
