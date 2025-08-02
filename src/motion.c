@@ -6,7 +6,7 @@
 #include "imu.h"
 #include "config.h"
 
-PID straight_pid = {0.5, 0.01, 0.1, 0, 0}; // tune this later
+PID straight_pid = {1.0, 0, 0, 0, 0}; // tune this later
 
 void move_forward_cm(float cm) {
     int target_ticks = cm * TICKS_PER_CM;
