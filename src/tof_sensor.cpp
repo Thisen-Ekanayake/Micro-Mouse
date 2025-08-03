@@ -26,3 +26,14 @@ void readToF(uint16_t &d1, uint16_t &d2, uint16_t &d3, String &l, String &r, Str
   r = sensor2.timeoutOccurred() ? "Timeout" : String(d2) + " mm";
   f = sensor3.timeoutOccurred() ? "Timeout" : String(d3) + " mm";
 }
+
+void readToFDistance(uint16_t &left, uint16_t &right, uint16_t &front) {
+  left = sensor1.readRangeContinuousMillimeters();
+  if (sensor1.timeoutOccurred()) left = 10000;  // large value indicate no wall
+
+  right = sensor2.readRangeContinuousMillimeters();
+  if (sensor2.timeoutOccurred()) right = 10000;
+
+  front = sensor3.readRangeContinuousMillimeters();
+  if (sensor3.timeoutOccurred()) front = 10000;
+}
