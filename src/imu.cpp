@@ -4,6 +4,7 @@
 #include "imu.h"
 
 MPU6050 mpu(Wire);
+float heading_offset = 0.0f;    // stores the offset for relative heading
 
 // === Optional angle normalization helper ===
 float normalize_angle(float angle) {
@@ -84,9 +85,13 @@ void imu_update() {
 }
 
 float imu_get_heading() {
-    return normalize_angle(mpu.getAngleZ());
+    return normalize_angle(mpu.getAngleZ() - heading_offset);
 }
 
 float imu_get_raw_angle() {
     return mpu.getAngleZ();  // Use this if you want unnormalized values
+}
+
+void imu_set_heading_offset(float offset) {
+    heading_offset = offset;
 }
