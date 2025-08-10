@@ -1,3 +1,4 @@
+/*
 #ifndef IR_SENSOR_H
 #define IR_SENSOR_H
 
@@ -15,3 +16,4 @@ bool is_wall_left();
 bool is_wall_right();
 
 #endif
+*/
