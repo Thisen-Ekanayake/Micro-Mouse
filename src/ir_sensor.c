@@ -1,3 +1,4 @@
+/*
 #include <Arduino.h>
 #include "config.h"
 #include "ir_sensor.h"
