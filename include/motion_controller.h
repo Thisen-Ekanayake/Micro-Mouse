@@ -1,34 +1,32 @@
+/*
 // motion_controller.h
-#ifndef MOTION_CONTROLLER_H
-#define MOTION_CONTROLLER_H
-
-#include "config.h"
+#pragma once
+#include <Arduino.h>
 #include "encoder.h"
 #include "motor.h"
 #include "imu.h"
-#include "pid.h"
 
 class MotionController {
 public:
     MotionController();
     void begin();
-    void moveForward(int cells);
-    void moveBackward(int cells);
+    void moveForward(float distance_cm);
+    void moveBackward(float distance_cm);
     void turnLeft();
     void turnRight();
     void stop();
+    void setPID(float kp, float ki, float kd, bool straight);
     
-    // PID Tuning Functions
-    void setStraightPID(float kp, float ki, float kd);
-    void setTurnPID(float kp, float ki, float kd);
-
 private:
-    PID straightPID;
-    PID turnPID;
-    bool pidEnabled = true;
+    struct PID {
+        float kp = 0.8, ki = 0.05, kd = 0.2;
+        float integral = 0;
+        float prev_error = 0;
+        void reset() { integral = 0; prev_error = 0; }
+    } straightPID, turnPID;
     
-    void move(int cells, bool forward);
-    void updatePosition(bool forward);
+    void moveLinear(float distance_cm, bool forward);
+    void turnToAngle(float target_deg);
+    float normalizeAngle(float angle);
 };
-
-#endif
+*/
