@@ -125,10 +125,10 @@ void motor_init() {
     pinMode(RIGHT_MOTOR_IN2, OUTPUT);
 
     // setup pwm on IN1 pins only (IN2 will be digital high/low)
-    ledcSetup(PWM_CHANNEL_LEFT, PWM_FREQ, PWM_RESOLUTOIN);
+    ledcSetup(PWM_CHANNEL_LEFT, PWM_FREQ, PWM_RESOLUTION);
     ledcAttachPin(LEFT_MOTOR_IN1, PWM_CHANNEL_LEFT);
 
-    ledcSetup(PWM_CHANNEL_RIGHT, PWM_FREQ, PWM_RESOLUTOIN);
+    ledcSetup(PWM_CHANNEL_RIGHT, PWM_FREQ, PWM_RESOLUTION);
     ledcAttachPin(RIGHT_MOTOR_IN1, PWM_CHANNEL_RIGHT);
 }
 
