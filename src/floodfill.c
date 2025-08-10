@@ -1,3 +1,4 @@
+/*
 #include "floodfill.h"
 #include "config.h"
 #include "maze.h"
