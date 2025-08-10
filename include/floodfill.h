@@ -1,3 +1,4 @@
+/*
 #ifndef FLOODFILL_H
 #define FLOODFILL_H
 
@@ -9,3 +10,4 @@ int floodfill_get_cost(int x, int y);
 Direction floodfill_get_lowest_neighbor(int x, int y);
 
 #endif
+*/
