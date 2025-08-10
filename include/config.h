@@ -22,9 +22,9 @@
 #define PWM_CHANNEL_LEFT    0
 #define PWM_CHANNEL_RIGHT   1
 #define PWM_FREQ            1000
-#define PWM_RESOLUTOIN      8   // 0 - 255
+#define PWM_RESOLUTION      8   // 0 - 255
 
-
+/*
 // ==== IR Sensors ====
 #define IR_SENSOR_LEFT      32
 #define IR_SENSOR_FRONT     33
@@ -33,7 +33,7 @@
 #define IR_THRESHOLD_FRONT  400
 #define IR_THRESHOLD_LEFT   400
 #define IR_THRESHOLD_RIGHT  400
-
+*/
 
 // ==== IMU (MPU6050) ====
 #define MPU_SDA             21
