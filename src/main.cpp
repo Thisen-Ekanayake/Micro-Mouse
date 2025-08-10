@@ -2,11 +2,11 @@
 #include <stdint.h>
 #include "config.h"
 #include "motor.h"
-#include "ir_sensor.h"
+// #include "ir_sensor.h"
 #include "imu.h"
 #include "button.h"
 #include "maze.h"
-#include "floodfill.h"
+// #include "floodfill.h"
 #include "motion.h"
 #include "encoder.h"
 #include "display.h"
@@ -115,7 +115,7 @@ void loop() {
   // while(true);
 }*/
 
-
+/*
 // === Constants ===
 const float WHEEL_DIAMETER_MM = 43.0;
 const int TICKS_PER_REVOLUTION = 1440;
@@ -259,3 +259,55 @@ void loop() {
     }
 }
 */
+
+using namespace maze;
+
+void setup() {
+  Serial.begin(115200);
+  while (!Serial) ;  // wait for serial on some boards
+
+  Serial.println("Maze Solver Starting...");
+
+  // Initialize motors, encoders, IMU, maze sensors & logic
+  motor_init();
+  encoder_init();
+  imu_init();
+  maze::begin();
+
+  delay(1000);  // stabilize sensors
+}
+
+void printPath(const std::vector<Pose>& path) {
+  Serial.println("Computed shortest path:");
+  for (size_t i = 0; i < path.size(); i++) {
+    Serial.printf("Step %d: x=%d, y=%d, dir=%d\n", int(i), path[i].x, path[i].y, int(path[i].d));
+  }
+}
+
+void loop() {
+  Serial.println("Starting maze exploration...");
+  startExploration();
+  Serial.println("Exploration complete.");
+
+  // Example goal cell (adjust as per your maze goal)
+  const int goalX = 7;
+  const int goalY = 7;
+
+  Serial.printf("Computing shortest path from (0,0) to (%d,%d)...\n", goalX, goalY);
+  std::vector<Pose> path = computeShortestPath(0, 0, goalX, goalY);
+
+  if (path.empty()) {
+    Serial.println("No path found!");
+    while(1) delay(1000);  // halt
+  }
+
+  printPath(path);
+
+  Serial.println("Executing shortest path...");
+  executePath(path);
+
+  Serial.println("Path execution complete.");
+
+  // Halt after one run
+  while(1) delay(1000);
+}
