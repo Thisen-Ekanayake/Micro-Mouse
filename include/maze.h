@@ -1,26 +1,29 @@
 #ifndef MAZE_H
 #define MAZE_H
 
+#include <vector>
 #include <stdint.h>
 
-// direction enum
-typedef enum {
-    NORTH   = 0,
-    EAST    = 1,
-    SOUTH   = 2,
-    WEST    = 3
-} Direction;
+namespace maze {
 
-// wall bitmask : 4 bits per cell
-#define WALL_NORTH (1 << NORTH)
-#define WALL_EAST (1 << EAST)
-#define WALL_SOUTH (1 << SOUTH)
-#define WALL_WEST (1 << WEST)
+enum Dir { NORTH = 0, EAST = 1, SOUTH = 2, WEST = 3 };
 
-void maze_init();
-void set_wall(int x, int y, Direction dir);
-int has_Wall(int x, int y, Direction dir);
-int is_valid_cell(int x, int y);
-void print_maze();
+struct Pose {
+  int x;
+  int y;
+  Dir d;
+};
+
+void begin(); // call from setup()
+void startExploration(); // blocks while exploring
+std::vector<Pose> computeShortestPath(int sx, int sy, int tx, int ty);
+void executePath(const std::vector<Pose>& path);
+void runToGoal(int sx, int sy, int tx, int ty); // convenience: plan+exec
+
+// tuning setters (optional)
+void setFrontThresholdMm(uint16_t mm);
+void setSideThresholdMm(uint16_t mm);
+
+} // namespace maze
 
 #endif
