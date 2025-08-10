@@ -24,6 +24,7 @@ void loop() {
 ===================================================================================================
 */
 
+// digitalRead() in ISRs is slow instead of this we can use gpio_get_level(pin)
 
 volatile int32_t left_ticks = 0;
 volatile int32_t right_ticks = 0;
