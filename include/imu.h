@@ -1,10 +1,18 @@
 #ifndef IMU_H
 #define IMU_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void imu_init();             // Initialize and calibrate the IMU
 void imu_update();           // Call this regularly (e.g., every 5–10ms)
 float imu_get_heading();     // Get Z-axis angle (yaw in degrees)
 float imu_get_raw_angle();   // (Optional) for direct use if normalization added
 void imu_set_heading_offset(float offset);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
