@@ -65,9 +65,22 @@ float angle_diff(float target, float current) {
 }
 
 void rotate_90_left() {
-    // use imu.get_heading() here later
-    motor_set_speed(-150,150);
-    delay(300);  // placeholder
+    float start = imu_get_heading();
+    float target = start + 90.0f;
+    if (target >= 360.0f) target -= 360.0f;
+
+    while (true) {
+        imu_update();
+        float current = imu_get_heading();
+        float diff = angle_diff(target, current);
+
+        if (fabs(diff) < TOLERANCE) break;  // reached target
+
+        // slow down when close to target
+        if (fabs(diff) < SLOW_DIST) motor_set_speed(TURN_SLOW, -TURN_SLOW);
+        else motor_set_speed(TURN_FAST, -TURN_FAST);
+    }
+
     motor_stop();
 }
 
