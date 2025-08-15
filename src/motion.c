@@ -6,6 +6,12 @@
 #include "imu.h"
 #include "config.h"
 
+// turning speed parameters
+const int TURN_FAST = 150;
+const int TURN_SLOW = 60;
+const float TOLERANCE = 1.0;  // degrees for final stop
+const float SLOW_DIST = 15.0;  // start slowing down when within 15°
+
 PID straight_pid = {1.0, 0, 0, 0, 0}; // tune this later
 
 void move_forward_cm(float cm) {
@@ -50,6 +56,13 @@ void move_backward_cm(float cm) {
 }
 
 // placeholder versions - implement this later
+
+float angle_diff(float target, float current) {
+    float diff = target - current;
+    if (diff < -180.0) diff += 360.0;
+    else if (diff > 180.0) diff -= 360.0;
+    return diff;
+}
 
 void rotate_90_left() {
     // use imu.get_heading() here later
