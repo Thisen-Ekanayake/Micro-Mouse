@@ -4,7 +4,13 @@
 #include "imu.h"
 
 MPU6050 mpu(Wire);
+
+unsigned long last_update = 0;
+float previous_heading = 0;
+float filtered_heading = 0;
+
 float heading_offset = 0.0f;    // stores the offset for relative heading
+const float alpha = 0.9f;       // smoothing factor (0.0 = no update, 1.0 = raw)
 
 // === Optional angle normalization helper ===
 float normalize_angle(float angle) {
@@ -77,11 +83,27 @@ void imu_init() {
     Serial.print(mpu.getGyroXoffset()); Serial.print(", ");
     Serial.print(mpu.getGyroYoffset()); Serial.print(", ");
     Serial.println(mpu.getGyroZoffset());
+
+    previous_heading = 0;
+    filtered_heading = 0;
+    last_update = millis();
 }
 
 
 void imu_update() {
-    mpu.update();  // Must be called regularly to track angle correctly
+    unsigned long now = millis();
+    if (now - last_update >= 5) {   // update at ~200 Hz
+        mpu.update();
+
+        // raw yaw angle
+        float raw = normalize_angle(mpu.getAngleZ() - heading_offset);
+
+        // apply low-pass filter
+        filtered_heading = alpha * previous_heading + (1 - alpha) * raw;
+        previous_heading = filtered_heading;
+
+        last_update = now;
+    }
 }
 
 float imu_get_heading() {
