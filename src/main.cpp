@@ -290,8 +290,8 @@ void loop() {
   Serial.println("Exploration complete.");
 
   // Example goal cell (adjust as per your maze goal)
-  const int goalX = 7;
-  const int goalY = 7;
+  const int goalX = 4;
+  const int goalY = 4;
 
   Serial.printf("Computing shortest path from (0,0) to (%d,%d)...\n", goalX, goalY);
   std::vector<Pose> path = computeShortestPath(0, 0, goalX, goalY);
