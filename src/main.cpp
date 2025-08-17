@@ -260,6 +260,7 @@ void loop() {
 }
 */
 
+/*
 using namespace maze;
 
 void setup() {
@@ -311,3 +312,4 @@ void loop() {
   // Halt after one run
   while(1) delay(1000);
 }
+*/
