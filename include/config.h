@@ -2,8 +2,8 @@
 #define CONFIG_H
 
 // ==== Encoder Pins ====
-#define ENCODER_LEFT_A      35
-#define ENCODER_LEFT_B      34
+#define ENCODER_LEFT_A      34
+#define ENCODER_LEFT_B      35
 #define ENCODER_RIGHT_A     33
 #define ENCODER_RIGHT_B     32
 
