@@ -23,7 +23,7 @@ void move_forward_cm(float cm) {
         float error = get_left_ticks() - get_right_ticks();
         float correction = pid_compute(&straight_pid, 0, error);
 
-        int base_speed = 100;
+        int base_speed = 150;
         int left_pwm = base_speed - correction;
         int right_pwm = base_speed + correction;
 
