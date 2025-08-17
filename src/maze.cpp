@@ -24,7 +24,7 @@ static int origin = MAZE_SIZE/2; // center of map -> starting location
 static int cx = 0, cy = 0; // logical coords relative to origin
 static Dir cdir = NORTH;
 static uint16_t FRONT_THRESH = 180; // mm, tune
-static uint16_t SIDE_THRESH  = 100; // mm, tune
+static uint16_t SIDE_THRESH  = 40; // mm, tune
 
 // helpers
 inline void setWallAbs(int gx, int gy, Dir d) {
