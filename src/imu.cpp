@@ -6,13 +6,16 @@
 MPU6050 mpu(Wire);
 
 unsigned long last_update = 0;
-float previous_heading = 0;
 float filtered_heading = 0;
-
+float gyro_heading = 0;
 float heading_offset = 0.0f;    // stores the offset for relative heading
-const float alpha = 0.9f;       // smoothing factor (0.0 = no update, 1.0 = raw)
 
-// === Optional angle normalization helper ===
+const float alpha = 0.98f;       // complementary filter factor (high = gyro heavy)
+const int smoothing_window = 5;  // moving average window size
+float heading_buffer[smoothing_window] = {0};
+int buffer_index = 0;
+
+// === Angle normalization helper ===
 float normalize_angle(float angle) {
     while (angle >= 360.0f) angle -= 360.0f;
     while (angle < 0.0f) angle += 360.0f;
@@ -84,34 +87,44 @@ void imu_init() {
     Serial.print(mpu.getGyroYoffset()); Serial.print(", ");
     Serial.println(mpu.getGyroZoffset());
 
-    previous_heading = 0;
     filtered_heading = 0;
+    gyro_heading = 0;
     last_update = millis();
 }
 
-
 void imu_update() {
     unsigned long now = millis();
-    if (now - last_update >= 5) {   // update at ~200 Hz
-        mpu.update();
+    float dt = (now - last_update) / 1000.0f; // convert ms to seconds
+    last_update = now;
 
-        // raw yaw angle
-        float raw = normalize_angle(mpu.getAngleZ() - heading_offset);
+    mpu.update();
 
-        // apply low-pass filter
-        filtered_heading = alpha * previous_heading + (1 - alpha) * raw;
-        previous_heading = filtered_heading;
+    float accel_angle = normalize_angle(mpu.getAngleZ() - heading_offset); // accelerometer angle
+    float gyro_rate = mpu.getGyroZ(); // degrees/s
 
-        last_update = now;
-    }
+    // integrate gyro
+    gyro_heading += gyro_rate * dt;
+    gyro_heading = normalize_angle(gyro_heading);
+
+    // complementary filter
+    float raw_filtered = alpha * gyro_heading + (1 - alpha) * accel_angle;
+    raw_filtered = normalize_angle(raw_filtered);
+
+    // simple moving average for extra smoothing
+    heading_buffer[buffer_index] = raw_filtered;
+    buffer_index = (buffer_index + 1) % smoothing_window;
+
+    float sum = 0;
+    for (int i = 0; i < smoothing_window; i++) sum += heading_buffer[i];
+    filtered_heading = normalize_angle(sum / smoothing_window);
 }
 
 float imu_get_heading() {
-    return normalize_angle(mpu.getAngleZ() - heading_offset);
+    return filtered_heading;
 }
 
 float imu_get_raw_angle() {
-    return mpu.getAngleZ();  // Use this if you want unnormalized values
+    return mpu.getAngleZ();
 }
 
 void imu_set_heading_offset(float offset) {
