@@ -64,41 +64,34 @@ float angle_diff(float target, float current) {
     return diff;
 }
 
-void rotate_90_left() {
-    float start = imu_get_heading();
-    float target = start + 90.0f;
-    if (target >= 360.0f) target -= 360.0f;
-
+void rotate_to(float target) {
     while (true) {
         imu_update();
         float current = imu_get_heading();
         float diff = angle_diff(target, current);
 
-        if (fabs(diff) < TOLERANCE) break;  // reached target
+        if (fabs(diff) < TOLERANCE) break;
 
-        // slow down when close to target
-        if (fabs(diff) < SLOW_DIST) motor_set_speed(TURN_SLOW, -TURN_SLOW);
-        else motor_set_speed(TURN_FAST, -TURN_FAST);
+        int dir = (diff > 0) ? 1 : -1; // turn left if positive, right if negative
+
+        if (fabs(diff) < SLOW_DIST)
+            motor_set_speed(TURN_SLOW * dir, -TURN_SLOW * dir);
+        else
+            motor_set_speed(TURN_FAST * dir, -TURN_FAST * dir);
     }
-
     motor_stop();
+}
+
+void rotate_90_left() {
+    float start = imu_get_heading();
+    float target = start + 90.0f;
+    if (target >= 360.0f) target -= 360.0f;
+    rotate_to(target);
 }
 
 void rotate_90_right() {
     float start = imu_get_heading();
     float target = start - 90.0f;
     if (target < 0.0f) target += 360.0f;
-
-    while (true) {
-        imu_update();
-        float current = imu_get_heading();
-        float diff = angle_diff(target, current);
-
-        if (fabs(diff) < TOLERANCE) break;  // reached target
-
-        if (fabs(diff) < SLOW_DIST) motor_set_speed(-TURN_SLOW, TURN_SLOW);
-        else motor_set_speed(-TURN_FAST, TURN_FAST);
-    }
-
-    motor_stop();
+    rotate_to(target);
 }
