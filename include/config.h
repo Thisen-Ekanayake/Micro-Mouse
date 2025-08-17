@@ -45,7 +45,7 @@
 
 
 // ==== Motion Constants ====
-#define TICKS_PER_CM        10.0f   // temporary guess - adjust after testing
+#define TICKS_PER_CM        36.418578f   // temporary guess - adjust after testing
 #define CELL_SIZE_CM        18
 #define MAZE_SIZE           16
 
