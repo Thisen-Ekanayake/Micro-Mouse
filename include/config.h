@@ -2,8 +2,8 @@
 #define CONFIG_H
 
 // ==== Encoder Pins ====
-#define ENCODER_LEFT_A      34
-#define ENCODER_LEFT_B      35
+#define ENCODER_LEFT_A      35
+#define ENCODER_LEFT_B      34
 #define ENCODER_RIGHT_A     33
 #define ENCODER_RIGHT_B     32
 
@@ -14,8 +14,8 @@
 #define LEFT_MOTOR_IN2      18  // Ain2
 
 // Right Motor (connected to Bin1 and Bin2)
-#define RIGHT_MOTOR_IN1     27  // Bin1 26
-#define RIGHT_MOTOR_IN2     26  // Bin2 27
+#define RIGHT_MOTOR_IN1     26  // Bin1 26
+#define RIGHT_MOTOR_IN2     27  // Bin2 27
 
 
 // ==== PWM ====
