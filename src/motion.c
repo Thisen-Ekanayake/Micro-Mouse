@@ -7,8 +7,8 @@
 #include "config.h"
 
 // turning speed parameters
-const int TURN_FAST = 150;
-const int TURN_SLOW = 60;
+const int TURN_FAST = 100;
+const int TURN_SLOW = 50;
 const float TOLERANCE = 1.0;  // degrees for final stop
 const float SLOW_DIST = 15.0;  // start slowing down when within 15°
 
@@ -23,7 +23,7 @@ void move_forward_cm(float cm) {
         float error = get_left_ticks() - get_right_ticks();
         float correction = pid_compute(&straight_pid, 0, error);
 
-        int base_speed = 150;
+        int base_speed = 100;
         int left_pwm = base_speed - correction;
         int right_pwm = base_speed + correction;
 
