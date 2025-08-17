@@ -313,3 +313,17 @@ void loop() {
   while(1) delay(1000);
 }
 */
+
+#include <Wire.h>
+#include "imu.h"
+
+void setup() {
+  Serial.begin(115200);
+  imu_init();
+}
+
+void loop() {
+  imu_update();
+  Serial.println(imu_get_heading()); // print continuous yaw
+  delay(100);
+}
